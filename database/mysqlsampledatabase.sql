@@ -22,7 +22,7 @@ Version 2.0
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`classicmodels` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`classicmodels` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `classicmodels`;
 
@@ -47,7 +47,7 @@ CREATE TABLE `customers` (
   PRIMARY KEY (`customerNumber`),
   KEY `salesRepEmployeeNumber` (`salesRepEmployeeNumber`),
   CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`salesRepEmployeeNumber`) REFERENCES `employees` (`employeeNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `customers` */
 
@@ -193,7 +193,7 @@ CREATE TABLE `employees` (
   KEY `officeCode` (`officeCode`),
   CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`reportsTo`) REFERENCES `employees` (`employeeNumber`),
   CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`officeCode`) REFERENCES `offices` (`officeCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `employees` */
 
@@ -237,7 +237,7 @@ CREATE TABLE `offices` (
   `postalCode` varchar(15) NOT NULL,
   `territory` varchar(10) NOT NULL,
   PRIMARY KEY (`officeCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `offices` */
 
@@ -264,7 +264,7 @@ CREATE TABLE `orderdetails` (
   KEY `productCode` (`productCode`),
   CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`orderNumber`) REFERENCES `orders` (`orderNumber`),
   CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`productCode`) REFERENCES `products` (`productCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `orderdetails` */
 
@@ -3281,7 +3281,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`orderNumber`),
   KEY `customerNumber` (`customerNumber`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerNumber`) REFERENCES `customers` (`customerNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `orders` */
 
@@ -3624,7 +3624,7 @@ CREATE TABLE `payments` (
   `amount` decimal(10,2) NOT NULL,
   PRIMARY KEY (`customerNumber`,`checkNumber`),
   CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`customerNumber`) REFERENCES `customers` (`customerNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `payments` */
 
@@ -3913,7 +3913,7 @@ CREATE TABLE `productlines` (
   `htmlDescription` mediumtext,
   `image` mediumblob,
   PRIMARY KEY (`productLine`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `productlines` */
 
@@ -3943,7 +3943,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`productCode`),
   KEY `productLine` (`productLine`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`productLine`) REFERENCES `productlines` (`productLine`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `products` */
 
