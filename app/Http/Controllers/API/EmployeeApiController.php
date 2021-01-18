@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
-class EmployeeController extends BaseController {
+class EmployeeApiController extends BaseController {
+
     /**
      * Display a listing of the resource.
      *
