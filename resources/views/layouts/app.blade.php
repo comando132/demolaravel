@@ -8,10 +8,29 @@
     <meta name="description" content="Lara API, demo con laravel">
     @include('layouts/css')
 </head>
-<body>
-    <div class="d-flex flex-column sticky-footer-wrapper min-vh-100">
+<body cz-shortcut-listen="true">
         <!-- Begin page content -->
-        <main class="container flex-column justify-content-center flex-fill">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main role="main" class="container">
             @if (session('success'))
                 <div class="alert alert-success">
                     {!! session('success') !!}
@@ -27,37 +46,13 @@
                     {!! session('status') !!}
                 </div>
             @endif
-            <header class="d-flex align-content-center">
-                <nav class="navbar navbar-expand-md navbar-light">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#">Disabled</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-            <div id="content" class="d-flex">
-                @yield('content')
-            </div>
-            <footer class="d-flex align-content-center">
-                <p>
-                    Hecho en México. <br/>
-                    Esta página puede ser reproducida con fines no lucrativos, siempre y cuando se cite la fuente completa y su dirección electrónica.
-                </p>
-            </footer>
+            @yield('content')
         </main>
-    </div>
+        <footer class="footer">
+            <div class="container">
+              <span class="text-muted">&copy; Hecho en México. Esta página puede ser reproducida con fines no lucrativos, siempre y cuando se cite la fuente completa y su dirección electrónica.</span>
+            </div>
+          </footer>
     @include('layouts/scripts')
 </body>
 </html>
