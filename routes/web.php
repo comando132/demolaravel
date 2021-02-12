@@ -17,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/employees',  [EmployeesController::class, 'index']);
 Route::get('/employees/add',  [EmployeesController::class, 'add'])->name('agregar-empleado');
+Route::get('/employees/add/{id}',  [EmployeesController::class, 'add'])->name('editar-empleado');
+Route::post('/employees/add',  [EmployeesController::class, 'add'])->name('guardar-empleado');
+Route::post('/employees/add/{id}',  [EmployeesController::class, 'add'])->name('editardatos-empleado');
+Route::post('/employees/getOffices',  [EmployeesController::class, 'getOffices'])->name('getOffices');
+Route::get('/employees/delete/{id}',  [EmployeesController::class, 'delete'])->name('borrar-empleado');
 

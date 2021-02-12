@@ -12,6 +12,7 @@ class Employee extends Model {
         'firstName',
         'extension',
         'email',
+        'officeCode',
         'reportsTo',
         'jobTitle'
     ];
