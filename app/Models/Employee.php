@@ -41,6 +41,16 @@ class Employee extends Model {
         return  $data->get();
     }
 
+    static function getEmployee($id) {
+        $data = Employee::select('*');
+        $data->where('employeeNumber', $id);
+        return $data->first();
+    }
+
+    static function getChiefs() {
+        return Employee::select('employeeNumber', 'firstName', 'lastName', 'jobTitle')->where('employeeNumber', '<=', '1143')->get();
+    }
+
 
 
 

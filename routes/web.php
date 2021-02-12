@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/employees',  [EmployeesController::class, 'index']);
+Route::get('/employees/add',  [EmployeesController::class, 'add'])->name('agregar-empleado');
 

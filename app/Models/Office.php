@@ -15,4 +15,18 @@ class Office extends Model {
         return $this->hasMany(Employee::class, $this->primaryKey);
     }
 
+    static function getCountryOffices() {
+        return Office::select('country')->distinct()->orderBy('country')->get();
+    }
+
+    static function getOffices($conditions = []) {
+        $data = Office::select('officeCode', 'country', 'city')->orderBy('country')->orderBy('city');
+        if (!empty($conditions)) {
+            foreach ($conditions as $cond => $val) {
+                $data->where($cond, $val);
+            }
+        }
+        return $data->get();
+    }
+
 }
