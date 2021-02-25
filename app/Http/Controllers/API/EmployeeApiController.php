@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 use App\Models\Employee;
+use App\Models\Office;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -85,6 +86,36 @@ class EmployeeApiController extends BaseController {
             return $this->sendResponse($data, $message);
         } catch (\Exception $e) {
             $message = 'No se pudo borrar el empleado.';
+            return $this->sendError($message, 500);
+        }
+    }
+
+    public function getCatalogo(Request $request, $catalogo) {
+        $message = "";
+        $data = [];
+        try {
+            switch ($catalogo) {
+                case 'chiefs':
+                    $data = Employee::getChiefs();
+                break;
+                case 'city':
+                    $data = Office::getCountryOffices();
+                break;
+                case 'office':
+                    $ciudad = $request->get('city');
+                    $conditions = [];
+                    if (!empty($ciudad)) {
+                        $conditions['country'] = $ciudad;
+                    }
+                    $data = Office::getOffices($conditions);
+                break;
+                default:
+                 throw new \Exception("Catálogo inválido");
+                break;
+            }
+            return $this->sendResponse($data, $message);
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
             return $this->sendError($message, 500);
         }
     }

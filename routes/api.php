@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/employee', [EmployeeApiController::class, 'index']);
+Route::get('/catalogos/{catalogo}', [EmployeeApiController::class, 'getCatalogo']);
 Route::post('/employee', [EmployeeApiController::class, 'add']);
 Route::post('/employee/{id}', [EmployeeApiController::class, 'update']);
 Route::delete('/employee/{id}', [EmployeeApiController::class, 'delete']);
