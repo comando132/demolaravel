@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 use App\Models\Employee;
 use App\Models\Office;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -90,16 +91,44 @@ class EmployeeApiController extends BaseController {
         }
     }
 
+    public function getEmployee(Request $request, $emp) {
+        $message = "";
+        try {
+            if (!empty($emp)) {
+                // buscar al employee
+                $employee = Employee::getEmployee($emp);
+                return $this->sendResponse($employee, $message);
+            } else {
+                throw new Exception('No se mando el identificador del empleado');
+            }
+        } catch(\Exception $e) {
+            $message = 'No se pudo obtener el empleado.';
+            return $this->sendError($message, 500);
+        }
+    }
+
     public function getCatalogo(Request $request, $catalogo) {
         $message = "";
         $data = [];
         try {
             switch ($catalogo) {
                 case 'chiefs':
-                    $data = Employee::getChiefs();
+                    $chiefs = Employee::getChiefs();
+                    foreach($chiefs as $key => $chief) {
+                        $data[$key] = [
+                            'employeeNumber' => $chief->employeeNumber,
+                            'name' => "{$chief->firstName} {$chief->lastName} - {$chief->jobTitle}"
+                        ];
+                    }
                 break;
                 case 'city':
-                    $data = Office::getCountryOffices();
+                    $cities = Office::getCountryOffices();
+                    foreach($cities as $key => $city) {
+                        $data[$key] = [
+                            'id_country' => $city->country,
+                            'country' => "{$city->country}"
+                        ];
+                    }
                 break;
                 case 'office':
                     $ciudad = $request->get('city');
@@ -107,7 +136,13 @@ class EmployeeApiController extends BaseController {
                     if (!empty($ciudad)) {
                         $conditions['country'] = $ciudad;
                     }
-                    $data = Office::getOffices($conditions);
+                    $offices = Office::getOffices($conditions);
+                    foreach($offices as $key => $city) {
+                        $data[$key] = [
+                            'officeCode' => $city->officeCode,
+                            'city' => "{$city->country} - {$city->city}"
+                        ];
+                    }
                 break;
                 default:
                  throw new \Exception("Catálogo inválido");
